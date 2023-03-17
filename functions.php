@@ -55,4 +55,117 @@ function score($player='x')
 }
 
 
+/*
+
+
+
+
+
+*/
+
+function playsCount() {
+    return $_SESSION['PLAYS'] ? $_SESSION['PLAYS'] : 0;
+}
+
+function addPlaysCount() {
+    if (! $_SESSION['PLAYS']) {
+        $_SESSION['PLAYS'] = 0;
+    }
+
+    $_SESSION['PLAYS']++;
+}
+
+
+
+function getTurn() {
+    return $_SESSION['TURN'] ? $_SESSION['TURN'] : 'x';
+}
+
+function markWin($player='x') {
+    $_SESSION['PLAYER_' . strtoupper($player) . '_WINS']++;
+}
+
+function switchTurn() {
+    switch (getTurn()) {
+        case 'x':
+            setTurn('o');
+            break;
+        default:
+            setTurn('x');
+            break;
+    }
+}
+
+function currentPlayer() {
+    return playerName(getTurn());
+}
+
+function play($cell='') {
+    if (getCell($cell)) {
+        return false;
+    }
+
+    $_SESSION['CELL_' . $cell] = getTurn();
+    addPlaysCount();
+    $win = playerPlayWin($cell);
+
+    if (! $win) {
+        switchTurn();
+    }
+    else {
+        markWin(getTurn());
+        resetBoard();
+    }
+
+    return $win;
+}
+
+function getCell($cell='') {
+    return $_SESSION['CELL_' . $cell];
+}
+
+function playerPlayWin($cell=1) {
+    if (playsCount() < 3) {
+        return false;
+    }
+
+    $column = $cell % 3;
+    if (! $column) {
+        $column = 3;
+    }
+
+    $row = ceil($cell / 3);
+
+    $player = getTurn();
+
+    return isVerticalWin($column, $player) || isHorizontalWin($row, $player) || isDiagonalWin($player);
+}
+
+function isVerticalWin($column=1, $turn='x') {
+    return getCell($column) == $turn &&
+        getCell($column + 3) == $turn &&
+        getCell($column + 6) == $turn;
+}
+
+function isHorizontalWin($row=1, $turn='x') {
+    return getCell($row) == $turn &&
+        getCell($row + 1) == $turn &&
+        getCell($row + 2) == $turn;
+}
+
+function isDiagonalWin($turn='x') {
+    $win = getCell(1) == $turn &&
+        getCell(9) == $turn;
+
+    if (! $win) {
+        $win = getCell(3) == $turn &&
+            getCell(7) == $turn;
+    }
+
+    return $win && getCell(5) == $turn;
+}
+
+
+
+
 ?>
