@@ -23,7 +23,7 @@ function setTurn($turn='x')
 
 function resetBoard() 
 {
-    resetPlaysCount();
+    $_SESSION['PLAYS'] = 0;
 
     for($i = 1; $i <= 9 ; $i++) {
         unset($_SESSION['CELL_'. $i]);
@@ -34,5 +34,25 @@ function resetWins()
     $_SESSION['PLAYER_X_WINS'] = 0;
     $_SESSION['PLAYER_O_WINS'] = 0;
 }
+
+// Une fois enrgistrer ajoutons les fonctions pour jouer 
+
+//Affichage du resultat
+function playersRegistered() 
+{
+    return $_SESSION['PLAYER_X_NAME'] && $_SESSION['PLAYER_O_NAME'];
+}
+
+
+function playerName($player='x') {
+    return $_SESSION['PLAYER' . strtoupper($player) . '_NAME'];
+}
+
+function score($player='x') 
+{
+    $score = $_SESSION['PLAYER_' . strtoupper($player) . '_WINS'];
+    return $score ? $score : 0;
+}
+
 
 ?>
