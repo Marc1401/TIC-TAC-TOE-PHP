@@ -3,22 +3,23 @@ require_once "templates/header.php";
 
 #On va rediriger les joeurs vers la bonne page apres chaque intervention
 
-if(!playersRegistered()) 
+if(! playersRegistered()) 
 {
     header("location:index.php");
 }
+
 if($_POST['cell']) 
 {
     $win = play($_POST['cell']);
     #s'il y a victoire on se dirige vers result.php
     if($win) 
     {
-        header("location:result.php?players=" .getTurn());
+        header("location: result.php?players=" . getTurn());
     }
 
 }
 
-if(playCount() >= 9) 
+if(playsCount() >= 9) 
 {
     header("location: result.php");
 }
@@ -81,13 +82,11 @@ if(playCount() >= 9)
 
 </form>
 
-
 <script type="text/javascript">
     function enableButton() {
         document.getElementById('play-btn').disabled = false;
     }
 </script>
 
-<?php 
-require_once "templates/footer.php";
-?>
+<?php
+require_once "templates/footer.php"; ?>
