@@ -48,3 +48,33 @@ button[disabled] {
 .welcome input {
     width: 100%;
 }
+
+
+
+.tic-tac-toe {
+    margin: 5em;
+}
+
+.tic-tac-toe td {
+    border: 10px solid white;
+    width: 100px;
+    height: 100px;
+}
+
+.tic-tac-toe .vertical-border {
+    border-left-color: #ede6e6;
+    border-right-color: #ede6e6;
+}
+
+.tic-tac-toe .horizontal-border {
+    border-top-color: #ede6e6;
+    border-bottom-color: #ede6e6;
+}
+
+.tic-tac-toe .center-border {
+    border-color: #ede6e6;
+}
+
+.play-bt{
+    font-size: 20px;
+}
