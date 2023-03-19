@@ -18,7 +18,7 @@ resetBoard();
                     <?php 
                     if($_GET['player']) 
                     {
-                        echo currentPlayer() . "a gagné";
+                        echo currentPlayer() . " a gagné";
                     }
                     else {
                         echo "Égalité !";
