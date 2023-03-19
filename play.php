@@ -82,7 +82,11 @@ if(playCount() >= 9)
 </form>
 
 
-
+<script type="text/javascript">
+    function enableButton() {
+        document.getElementById('play-btn').disabled = false;
+    }
+</script>
 
 <?php 
 require_once "templates/footer.php";
