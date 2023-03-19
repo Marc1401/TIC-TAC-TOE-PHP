@@ -1,32 +1,24 @@
-<?php 
+<?php
 require_once "templates/header.php";
 
 #On va rediriger les joeurs vers la bonne page apres chaque intervention
-
-if(! playersRegistered()) 
-{
-    header("location:index.php");
+#correction 
+if (!playersRegistered()) {
+    header("location: index.php");
 }
 
-if($_POST['cell']) 
-{
+if ($_POST['cell']) {
     $win = play($_POST['cell']);
-    #s'il y a victoire on se dirige vers result.php
-    if($win) 
-    {
-        header("location: result.php?players=" . getTurn());
-    }
 
+    if ($win) {
+        header("location: result.php?player=" . getTurn());
+    }
 }
 
-if(playsCount() >= 9) 
-{
+if (playsCount() >= 9) {
     header("location: result.php");
 }
-
-
 ?>
-
 <h2><?php echo currentPlayer() ?>'s turn</h2>
 
 <form method="post" action="play.php">
@@ -78,7 +70,7 @@ if(playsCount() >= 9)
         </tbody>
     </table>
 
-    <button type="submit" disabled id="play-btn" class="play-bt">Play</button>
+    <button type="submit" disabled id="play-btn">Play</button>
 
 </form>
 
@@ -89,4 +81,5 @@ if(playsCount() >= 9)
 </script>
 
 <?php
-require_once "templates/footer.php"; ?>
+require_once "templates/footer.php";
+?>
